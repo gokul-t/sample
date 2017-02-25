@@ -1,0 +1,28 @@
+<section>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor="let todo of todos">
+            <div class="row">
+                <div class="col-sm-10">
+                    {{ todo.text }}
+                </div>
+                <div class="col-sm-2">
+                    <button (click)="remove(todo)" class="btn btn-sm btn-danger">x</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<section>
+    <form (ngSubmit)="create()" #createForm="ngForm" novalidate="true">
+        <h3> Create </h3>
+        <div class="form-group">
+            <label for="todo">Enter new todo *</label>
+            <input type="text" name="todo" [(ngModel)]="todo.text" #text="ngModel" class="form-control" required="true">
+            <span *ngIf="todo.text" class="form-info">your new todo will be : {{ todo.text}}</span>
+            <span [hidden]="text.valid || text.pristine" class="form-error">this field is required</span>
+        </div>
+        <div>
+            <button [disabled]="!createForm.form.valid" type="submit" class="btn btn-success">save</button>
+        </div>
+    </form>
+</section>
